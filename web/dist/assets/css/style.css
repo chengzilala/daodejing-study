@@ -1,0 +1,145 @@
+/* ===== 主题变量：昼（古卷黄）/ 夜（墨色） ===== */
+:root {
+  --ddj-bg:#efe0b6;
+  --ddj-card:#fbf1d3;
+  --ddj-ink:#3b2f1a;
+  --ddj-muted:#8a7a55;
+  --ddj-accent:#9a3324;
+  --ddj-line:#c8ac74;
+  --ddj-seal:#a6382c;
+  --ddj-frame:rgba(150,120,60,.28);
+  --ddj-silk-light:#f4ead6;
+  --ddj-silk-deep:#d5c096;
+  --ddj-paper:rgba(255,252,243,.52);
+}
+body.ddj-ink {
+  --ddj-bg:#27231d;
+  --ddj-card:#33302a;
+  --ddj-ink:#e6dcc2;
+  --ddj-muted:#a2947a;
+  --ddj-accent:#c0503c;
+  --ddj-line:#574c38;
+  --ddj-seal:#b03a2e;
+  --ddj-frame:rgba(200,180,140,.30);
+  --ddj-silk-light:#2c3538;
+  --ddj-silk-deep:#131a1c;
+  --ddj-paper:rgba(255,250,235,.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { min-height: 100%; }
+
+body {
+  color: var(--ddj-ink);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.7;
+  /* 绢本质感：暖米黄渐变 + 明暗不匀 */
+  background-color: var(--ddj-bg);
+  background-image:
+    radial-gradient(120% 90% at 12% 6%, var(--ddj-silk-light) 0%, transparent 58%),
+    radial-gradient(100% 80% at 88% 94%, var(--ddj-silk-deep) 0%, transparent 62%);
+  background-attachment: fixed;
+}
+
+/* ===== 纹理层：折痕 + 绢织纹 + 纤维噪点 ===== */
+.texture {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(102deg, transparent 17.8%, rgba(255,255,255,.20) 19%, transparent 20.4%),
+    linear-gradient(102deg, transparent 61.6%, rgba(120,95,60,.08) 62.8%, transparent 64.4%),
+    linear-gradient(78deg, transparent 39.6%, rgba(255,255,255,.12) 40.8%, transparent 42.4%);
+  mix-blend-mode: soft-light;
+}
+.texture::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(120,95,60,.035) 0 1px, transparent 1px 3px);
+}
+.texture::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  opacity: .25;
+  mix-blend-mode: overlay;
+}
+
+/* ===== 布局 ===== */
+.ddj-wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 40px 24px 72px; }
+
+.ddj-header { text-align: center; margin-bottom: 26px; }
+.ddj-title {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 40px; font-weight: 700; letter-spacing: 10px;
+}
+.ddj-seal {
+  display: inline-block; width: 40px; height: 40px; background: var(--ddj-seal);
+  color: #fff; border-radius: 4px; font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 20px; line-height: 40px; text-align: center; margin-left: 8px;
+  vertical-align: 6px; box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+}
+.ddj-subtitle { color: var(--ddj-muted); margin-top: 10px; font-size: 14px; letter-spacing: 3px; }
+
+/* 主题切换 */
+.ddj-theme-bar { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.ddj-theme-btn {
+  padding: 4px 14px; border: 1px solid var(--ddj-line); border-radius: 4px;
+  cursor: pointer; font-size: 13px; color: var(--ddj-muted); background: transparent;
+}
+.ddj-theme-btn.active { background: var(--ddj-accent); color: #fff; border-color: var(--ddj-accent); }
+
+/* 分组 tab */
+.ddj-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.ddj-tab {
+  padding: 7px 18px; border: 1px solid var(--ddj-line); border-radius: 4px;
+  background: var(--ddj-card); cursor: pointer; font-size: 14px; color: var(--ddj-muted);
+  font-family: "Noto Serif SC", "Songti SC", serif;
+}
+.ddj-tab.active { background: var(--ddj-accent); color: #fff; border-color: var(--ddj-accent); }
+
+/* 章节卡片 */
+.ddj-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ddj-card {
+  display: block; background: var(--ddj-card); border: 1px solid var(--ddj-line);
+  border-radius: 4px; outline: 1px solid var(--ddj-frame); outline-offset: -5px;
+  padding: 14px 12px; text-align: center; cursor: pointer; text-decoration: none;
+  transition: .15s; font-family: "Noto Serif SC", "Songti SC", serif;
+}
+.ddj-card:hover { border-color: var(--ddj-accent); transform: translateY(-2px); }
+.ddj-card .ddj-no { font-size: 13px; color: var(--ddj-muted); }
+.ddj-card .ddj-topic { font-size: 16px; margin-top: 4px; font-weight: 600; color: var(--ddj-ink); }
+
+/* 章节详情 */
+.ddj-detail .ddj-back { display: inline-block; margin-bottom: 16px; color: var(--ddj-accent); font-size: 14px; text-decoration: none; }
+.ddj-h { text-align: center; margin-bottom: 24px; }
+.ddj-h .ddj-no { font-size: 15px; color: var(--ddj-muted); letter-spacing: 3px; }
+.ddj-h h2 { font-family: "Noto Serif SC", "Songti SC", serif; font-size: 30px; margin-top: 6px; letter-spacing: 6px; }
+
+.ddj-block {
+  background: var(--ddj-card); border: 1px solid var(--ddj-line); border-radius: 4px;
+  outline: 1px solid var(--ddj-frame); outline-offset: -5px;
+  padding: 24px 26px; margin-bottom: 16px;
+}
+.ddj-block h3 { font-size: 14px; color: var(--ddj-accent); margin-bottom: 12px; letter-spacing: 3px; text-align: center; }
+.ddj-block h3::before, .ddj-block h3::after { content: "──"; color: var(--ddj-line); margin: 0 8px; }
+
+.ddj-yuanwen { font-family: "Noto Serif SC", "Songti SC", "STSong", serif; font-size: 21px; line-height: 2.1; }
+.ddj-yuanwen p { margin-bottom: 8px; }
+.ddj-baihua { font-size: 16px; }
+.ddj-baihua p { margin-bottom: 10px; }
+.ddj-daodu { font-size: 15px; color: var(--ddj-ink); opacity: .88; }
+.ddj-daodu p { margin-bottom: 8px; }
+
+/* 上一章 / 下一章 */
+.ddj-pagenav { display: flex; justify-content: space-between; align-items: center; margin: 20px 0 8px; gap: 10px; }
+.ddj-prev, .ddj-next, .ddj-toc { color: var(--ddj-accent); text-decoration: none; font-size: 15px; }
+.ddj-prev.empty, .ddj-next.empty { visibility: hidden; }
+.ddj-toc { border: 1px solid var(--ddj-line); padding: 4px 14px; border-radius: 4px; color: var(--ddj-muted); }
+
+.ddj-note { font-size: 12px; color: var(--ddj-muted); text-align: center; margin-top: 8px; }
+
+@media (max-width: 640px) {
+  .ddj-grid { grid-template-columns: repeat(2, 1fr); }
+  .ddj-yuanwen { font-size: 18px; }
+}

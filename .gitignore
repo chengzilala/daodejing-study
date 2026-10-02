@@ -1,5 +1,4 @@
-# 构建产物
-web/dist/
+# 构建产物 web/dist/ 已入库（帽子云纯静态托管需要），不再忽略
 *.zip
 debug.log
 __debug_*
