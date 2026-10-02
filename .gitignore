@@ -1,0 +1,29 @@
+# 构建产物
+web/dist/
+*.zip
+debug.log
+__debug_*
+
+# 私钥（一律不入库）
+*.pem
+
+# Trae 本地配置（规则/技能副本由「AI协作规划库」母本同步生成，不入库）
+.trae/
+
+# 个人文件（不入库）
+备忘录.md
+inbox/
+
+# 网站：Obsidian 本地配置不入库（内容图片需入库，故不忽略 attachments/）
+web/content/.obsidian/
+web/content/.trash/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统
+.DS_Store
+Thumbs.db

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>背景样张 · 古绢质感</title>
+<style>
+  /* ===== 配色：昼（古绢本）/ 夜（深墨绢） ===== */
+  :root {
+    --silk-base:  #e9dcc1;   /* 绢本底色：暖米黄 */
+    --silk-light: #f4ead6;   /* 受光处 */
+    --silk-deep:  #d5c096;   /* 背光处 */
+    --ink:        #2b2318;   /* 墨色正文 */
+    --ink-soft:   #5a4b34;   /* 次级文字 */
+    --paper:      rgba(255, 252, 243, 0.52);  /* 正文纸面衬底 */
+    --rule:       rgba(90, 70, 40, 0.28);
+  }
+  html[data-theme="night"] {
+    --silk-base:  #1f2628;   /* 深墨靛底，不用纯黑 */
+    --silk-light: #2c3538;
+    --silk-deep:  #131a1c;
+    --ink:        #ded2b8;
+    --ink-soft:   #aba08a;
+    --paper:      rgba(255, 250, 235, 0.06);
+    --rule:       rgba(222, 210, 184, 0.20);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { min-height: 100%; }
+
+  body {
+    margin: 0;
+    padding: 48px 20px 72px;
+    color: var(--ink);
+    font-family: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", "SimSun", serif;
+    /* 底色：不用纯色，用三层柔和渐变做出绢的明暗不匀 */
+    background-color: var(--silk-base);
+    background-image:
+      radial-gradient(120% 90% at 12% 6%,  var(--silk-light) 0%, transparent 58%),
+      radial-gradient(100% 80% at 88% 94%, var(--silk-deep)  0%, transparent 62%),
+      radial-gradient(55% 45% at 72% 22%, rgba(255, 255, 255, 0.22), transparent 72%);
+    background-attachment: fixed;
+  }
+
+  /* ===== 纹理层：折痕 + 绢织纹 + 纤维噪点 ===== */
+  .texture {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    /* 折痕：几条极柔的明暗带，模拟绢帛被折叠/绷开的走向 */
+    background-image:
+      linear-gradient(102deg, transparent 17.8%, rgba(255,255,255,0.30) 19.0%, transparent 20.4%),
+      linear-gradient(102deg, transparent 61.6%, rgba(120,95,60,0.10)  62.8%, transparent 64.4%),
+      linear-gradient(78deg,  transparent 39.6%, rgba(255,255,255,0.16) 40.8%, transparent 42.4%),
+      linear-gradient(78deg,  transparent 81.6%, rgba(120,95,60,0.08)  82.8%, transparent 84.2%);
+    mix-blend-mode: soft-light;
+  }
+  /* 绢的经纬织纹：两个方向 1px 细线，极低不透明度 */
+  .texture::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(255,255,255,0.055) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(120,95,60,0.045)  0 1px, transparent 1px 3px),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 4px);
+  }
+  /* 纤维/斑驳噪点：内联 SVG 的 fractalNoise，无外部请求 */
+  .texture::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='220'%20height='220'%20filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    opacity: 0.30;
+    mix-blend-mode: overlay;
+  }
+
+  /* ===== 内容 ===== */
+  .page { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+
+  .sample-note {
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 12px; line-height: 1.9;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--rule);
+    padding: 2px 0 2px 12px;
+    margin: 0 0 28px;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 40px 44px 48px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.35) inset, 0 12px 32px rgba(60,45,20,0.10);
+    backdrop-filter: blur(1.5px);
+  }
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 26px; font-weight: 500; letter-spacing: 0.18em;
+  }
+  .subtitle {
+    margin: 0 0 28px;
+    font-size: 13px; letter-spacing: 0.24em;
+    color: var(--ink-soft);
+  }
+
+  .original {
+    font-size: 21px; line-height: 2.35; letter-spacing: 0.08em;
+    text-align: justify; margin: 0 0 28px;
+  }
+
+  .divider {
+    border: 0; height: 1px; margin: 0 0 28px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+
+  h2 {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.28em;
+    color: var(--ink-soft); margin: 0 0 12px;
+  }
+  .vernacular {
+    font-size: 16px; line-height: 2.1; letter-spacing: 0.04em;
+    margin: 0; color: var(--ink);
+  }
+
+  /* 昼 / 夜 切换 */
+  .toggle {
+    position: fixed; right: 22px; bottom: 22px; z-index: 2;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 13px; letter-spacing: 0.1em;
+    color: var(--ink); background: var(--paper);
+    border: 1px solid var(--rule); border-radius: 999px;
+    padding: 9px 18px; cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+  .toggle:hover { border-color: var(--ink-soft); }
+</style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+
+  <main class="page">
+    <p class="sample-note">
+      背景样张（非最终成品）｜ 底色为古绢质感：暖米黄渐变 + 经纬织纹 + 纤维噪点，均为 CSS / 内联 SVG 生成，<b>不含任何图片文件</b>。<br>
+      右下角可切换昼夜，看暗色下是否仍保留绢本质感。
+    </p>
+
+    <article class="card">
+      <h1>道德經 · 第一章</h1>
+      <p class="subtitle">DAODEJING · CHAPTER 1</p>
+
+      <p class="original">
+        道可道，非常道。名可名，非常名。<br>
+        無名天地之始，有名萬物之母。<br>
+        故常無欲，以觀其妙；常有欲，以觀其徼。<br>
+        此兩者同出而異名，同謂之玄。<br>
+        玄之又玄，眾妙之門。
+      </p>
+
+      <hr class="divider">
+
+      <h2>白 話</h2>
+      <p class="vernacular">
+        可以说得出来的"道"，就不是那个恒常的道；可以叫得出来的名，也不是那个恒常的名。
+        没有名字，是天地的开端；有了名字，是万物的母体。
+        所以常从"无"处着眼，去看它的微妙；常从"有"处着眼，去看它的边际。
+        这两者同出一源而名称不同，都可以叫作幽深。幽深之中再幽深，正是一切奥妙的门径。
+      </p>
+    </article>
+  </main>
+
+  <button class="toggle" id="toggle" type="button">切 换 昼 / 夜</button>
+
+<script>
+  // 昼夜切换：只切 <html data-theme>，配色靠 CSS 变量
+  document.getElementById('toggle').addEventListener('click', function () {
+    var root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'night' ? 'day' : 'night';
+  });
+</script>
+</body>
+</html>

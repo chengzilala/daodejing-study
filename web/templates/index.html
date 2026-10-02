@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@@SITE_NAME@@</title>
+<meta name="description" content="@@SITE_DESC@@">
+<link rel="stylesheet" href="@@ASSETS@@assets/css/style.css">
+</head>
+<body>
+<div class="texture" aria-hidden="true"></div>
+
+<main class="ddj-wrap">
+  <header class="ddj-header">
+    <h1 class="ddj-title">@@SITE_NAME@@<span class="ddj-seal">道</span></h1>
+    <div class="ddj-subtitle">原文 · 白话 · 导读</div>
+    <div class="ddj-theme-bar">
+      <button class="ddj-theme-btn active" data-theme="light" type="button">古卷黄</button>
+      <button class="ddj-theme-btn" data-theme="ink" type="button">墨色</button>
+    </div>
+  </header>
+
+  <div class="ddj-tabs">
+    <button class="ddj-tab active" data-g="all" type="button">全部</button>
+    <button class="ddj-tab" data-g="dao" type="button">道篇（1–37）</button>
+    <button class="ddj-tab" data-g="de" type="button">德篇（38–81）</button>
+  </div>
+
+  <div class="ddj-grid">
+@@CARDS@@
+  </div>
+
+  <p class="ddj-note">原文据通行本（王弼本）；章题据河上公本；白话、导读均为「编者解读」，非定论。</p>
+</main>
+
+<script src="@@ASSETS@@assets/js/main.js"></script>
+</body>
+</html>
